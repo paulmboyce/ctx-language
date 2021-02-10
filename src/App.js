@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import UserCreate from "./UserCreate";
 
 function App() {
 	const [lblName, setLblName] = useState("Name");
@@ -15,9 +16,7 @@ function App() {
 			>
 				Portuguese
 			</span>
-			<label htmlFor="id-name">{lblName}</label>
-			<input id="id-name" type="text"></input>
-			<div role="button">{lblSubmit}</div>
+			<UserCreate lblName={lblName} lblSubmit={lblSubmit} />
 		</div>
 	);
 }
