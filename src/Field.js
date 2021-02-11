@@ -14,12 +14,14 @@ const Field = () => {
 
 	return (
 		<LanguageContext.Consumer>
-			{({ language }) => (
-				<div className="<Field>">
-					<label htmlFor="id-name">{renderLabel(language)}</label>
-					<input id="id-name" type="text"></input>
-				</div>
-			)}
+			{function ({ language }) {
+				return (
+					<div>
+						<label htmlFor="id-name">{renderLabel(language)}</label>
+						<input id="id-name" type="text"></input>
+					</div>
+				);
+			}}
 		</LanguageContext.Consumer>
 	);
 };
