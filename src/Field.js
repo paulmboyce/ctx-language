@@ -1,4 +1,4 @@
-import { React } from "react-dom";
+import { React } from "react";
 import LanguageContext from "./context/LanguageContext";
 
 const Field = () => {
