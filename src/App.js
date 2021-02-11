@@ -1,22 +1,29 @@
 import { React, useState } from "react";
 import UserCreate from "./UserCreate";
+import LanguageContext from "./context/LanguageContext";
 
 function App() {
-	const [lblName, setLblName] = useState("Name");
-	const [lblSubmit, setLblSubmit] = useState("OK");
+	const [language, setLanguage] = useState("EN");
 	return (
 		<div>
 			Select a language:
-			<span>US</span>
 			<span
 				onClick={() => {
-					setLblName("Nome");
-					setLblSubmit("Esta Bem");
+					setLanguage("EN");
+				}}
+			>
+				US
+			</span>
+			<span
+				onClick={() => {
+					setLanguage("PT");
 				}}
 			>
 				Portuguese
 			</span>
-			<UserCreate lblName={lblName} lblSubmit={lblSubmit} />
+			<LanguageContext.Provider value={{ language: language }}>
+				<UserCreate />
+			</LanguageContext.Provider>
 		</div>
 	);
 }

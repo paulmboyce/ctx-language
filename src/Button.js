@@ -1,10 +1,25 @@
-import React from "react";
+import { React } from "react";
+import LanguageContext from "./context/LanguageContext";
 
-const Button = ({ lblSubmit }) => {
+const Button = () => {
+	const renderLanguage = (lang) => {
+		switch (lang) {
+			case "PT":
+				return "Esta Bem";
+
+			default:
+				//EN
+				return "OK";
+		}
+	};
 	return (
-		<div className="<Button>">
-			<div role="button">{lblSubmit}</div>
-		</div>
+		<LanguageContext.Consumer>
+			{({ language }) => (
+				<div className="<Button>">
+					<div role="button">{renderLanguage(language)}</div>
+				</div>
+			)}
+		</LanguageContext.Consumer>
 	);
 };
 
