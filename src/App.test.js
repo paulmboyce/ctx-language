@@ -8,13 +8,11 @@ describe("Test <App>", function () {
 	});
 
 	it("renders select a language", () => {
-		const linkElement = screen.getByText(/SELECT A LANGUAGE/i);
-		expect(linkElement).toBeInTheDocument();
+		expect(screen.getByText(/SELECT A LANGUAGE/i)).toBeInTheDocument();
 	});
 
 	it("renders US option", function () {
-		const el = screen.getByText(/US/i);
-		expect(el).toBeInTheDocument();
+		expect(screen.getByText(/US/i)).toBeInTheDocument();
 	});
 
 	it("renders PORTUGUESE option", function () {
@@ -25,39 +23,36 @@ describe("Test <App>", function () {
 
 	it("renders a submit button", function () {
 		//ASS
-		const btn = screen.getByRole("button", { name: /OK/i });
-		expect(btn).toBeInTheDocument();
+		expect(screen.getByRole("button", { name: /OK/i })).toBeInTheDocument();
 	});
 
 	it("has an NAME input field", function () {
 		//ASS
-		const input = screen.getByLabelText(/NAME/i);
-		expect(input).toBeInTheDocument();
+		expect(screen.getByLabelText(/NAME/i)).toBeInTheDocument();
 	});
 
 	it("shows label, button in PORTUGUESE, when click on PT language", async function () {
 		//ACT
-		const selectPT = screen.getByText(/PORTUGUESE/i);
-		fireEvent.click(selectPT);
+		fireEvent.click(screen.getByText(/PORTUGUESE/i));
 
 		//ASS
 		await waitFor(function () {
-			const translated = screen.getByLabelText(/NOME/i);
-			expect(translated).toBeInTheDocument();
-			const btn = screen.getByRole("button", { name: /ESTA BEM/i });
-			expect(btn).toBeInTheDocument();
+			expect(screen.getByLabelText(/NOME/i)).toBeInTheDocument();
+			expect(
+				screen.getByRole("button", { name: /ESTA BEM/i })
+			).toBeInTheDocument();
 		});
 	});
 
 	it("shows label in ENGLISH, when click on US language", async function () {
+		//ARR
+		fireEvent.click(screen.getByText(/PORTUGUESE/i));
 		//ACT
-		const selectPT = screen.getByText(/US/i);
-		fireEvent.click(selectPT);
+		fireEvent.click(screen.getByText(/US/i));
 
 		//ASS
 		await waitFor(function () {
-			const translated = screen.getByLabelText(/NAME/i);
-			expect(translated).toBeInTheDocument();
+			expect(screen.getByLabelText(/NAME/i)).toBeInTheDocument();
 		});
 	});
 });
