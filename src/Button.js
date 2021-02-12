@@ -15,7 +15,7 @@ const Button = () => {
 	};
 	return (
 		<div className="<Button>">
-			return <div role="button">{renderButtonText(language)}</div>;
+			<div role="button">{renderButtonText(language)}</div>
 		</div>
 	);
 };

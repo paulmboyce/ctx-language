@@ -1,4 +1,4 @@
-import { React } from "react-dom";
+import { React } from "react";
 
 import Field from "./FieldClass";
 import Button from "./Button";
