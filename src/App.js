@@ -1,6 +1,8 @@
 import { React, useState } from "react";
 import UserCreate from "./UserCreate";
 import LanguageContext from "./context/LanguageContext";
+import Field from "./FieldClass";
+import Button from "./Button";
 
 function App() {
 	const [language, setLanguage] = useState("EN");
@@ -22,7 +24,14 @@ function App() {
 				Portuguese
 			</span>
 			<LanguageContext.Provider value={{ language: language }}>
-				<UserCreate />
+				{(() => {
+					return (
+						<div>
+							<Field />
+							<Button />
+						</div>
+					);
+				})()}
 			</LanguageContext.Provider>
 		</div>
 	);
