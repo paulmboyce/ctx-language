@@ -31,7 +31,7 @@ describe("Test <App>", function () {
 		expect(screen.getByLabelText(/NAME/i)).toBeInTheDocument();
 	});
 
-	it("shows label, button in PORTUGUESE, when click on PT language", async function () {
+	it("shows label, button in PT, when click on PT language", async function () {
 		//ACT
 		fireEvent.click(screen.getByText(/PORTUGUESE/i));
 
