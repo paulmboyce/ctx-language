@@ -9,30 +9,31 @@ function App() {
 	return (
 		<LanguageContext.Provider value={{ language: lang }}>
 			<div>
-				<LanguageContext.Consumer>
-					{({ language }) => {
-						return (
-							<div>
-								Select a language:
-								<span>{language}</span>
-								<span
-									onClick={() => {
-										setLang("EN");
-									}}
-								>
-									US
-								</span>
-								<span
-									onClick={() => {
-										setLang("PT");
-									}}
-								>
-									Portuguese
-								</span>
-							</div>
-						);
-					}}
-				</LanguageContext.Consumer>
+				<div>
+					<span>Select a language:</span>
+					<span
+						onClick={() => {
+							setLang("EN");
+						}}
+					>
+						US
+					</span>
+					<span
+						onClick={() => {
+							setLang("PT");
+						}}
+					>
+						Portuguese
+					</span>
+					<span> </span>
+					<LanguageContext.Consumer>
+						{(ctx) => {
+							return (
+								<span style={{ fontWeight: 700 }}>Showing: {ctx.language}</span>
+							);
+						}}
+					</LanguageContext.Consumer>
+				</div>
 				{(() => {
 					return (
 						<div>
