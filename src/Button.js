@@ -1,8 +1,7 @@
-import { React, useContext } from "react";
-import LanguageContext from "./context/LanguageContext";
-
+import { React } from "react";
+import useLanguageContext from "./useLanguageContext";
 const Button = () => {
-	const { language } = useContext(LanguageContext);
+	const ctx = useLanguageContext();
 	const renderButtonText = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -15,7 +14,7 @@ const Button = () => {
 	};
 	return (
 		<div className="<Button>">
-			<div role="button">{renderButtonText(language)}</div>
+			<div role="button">{renderButtonText(ctx.language)}</div>
 		</div>
 	);
 };
