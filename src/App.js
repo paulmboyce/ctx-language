@@ -5,25 +5,34 @@ import Field from "./FieldClass";
 import Button from "./Button";
 
 function App() {
-	const [language, setLanguage] = useState("EN");
+	const [lang, setLang] = useState("EN");
 	return (
-		<LanguageContext.Provider value={{ language: language }}>
+		<LanguageContext.Provider value={{ language: lang }}>
 			<div>
-				Select a language:
-				<span
-					onClick={() => {
-						setLanguage("EN");
+				<LanguageContext.Consumer>
+					{({ language }) => {
+						return (
+							<div>
+								Select a language:
+								<span>{language}</span>
+								<span
+									onClick={() => {
+										setLang("EN");
+									}}
+								>
+									US
+								</span>
+								<span
+									onClick={() => {
+										setLang("PT");
+									}}
+								>
+									Portuguese
+								</span>
+							</div>
+						);
 					}}
-				>
-					US
-				</span>
-				<span
-					onClick={() => {
-						setLanguage("PT");
-					}}
-				>
-					Portuguese
-				</span>
+				</LanguageContext.Consumer>
 				{(() => {
 					return (
 						<div>
