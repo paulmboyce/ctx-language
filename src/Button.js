@@ -1,5 +1,5 @@
 import { React } from "react";
-import useLanguageContext from "./useLanguageContext";
+import useLanguageContext from "./hook/useLanguageContext";
 const Button = () => {
 	const ctx = useLanguageContext();
 	const renderButtonText = (lang) => {
