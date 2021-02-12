@@ -7,23 +7,23 @@ import Button from "./Button";
 function App() {
 	const [language, setLanguage] = useState("EN");
 	return (
-		<div>
-			Select a language:
-			<span
-				onClick={() => {
-					setLanguage("EN");
-				}}
-			>
-				US
-			</span>
-			<span
-				onClick={() => {
-					setLanguage("PT");
-				}}
-			>
-				Portuguese
-			</span>
-			<LanguageContext.Provider value={{ language: language }}>
+		<LanguageContext.Provider value={{ language: language }}>
+			<div>
+				Select a language:
+				<span
+					onClick={() => {
+						setLanguage("EN");
+					}}
+				>
+					US
+				</span>
+				<span
+					onClick={() => {
+						setLanguage("PT");
+					}}
+				>
+					Portuguese
+				</span>
 				{(() => {
 					return (
 						<div>
@@ -32,8 +32,8 @@ function App() {
 						</div>
 					);
 				})()}
-			</LanguageContext.Provider>
-		</div>
+			</div>
+		</LanguageContext.Provider>
 	);
 }
 
