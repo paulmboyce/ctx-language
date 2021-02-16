@@ -1,7 +1,8 @@
 import { React } from "react";
-import useLanguageContext from "./hook/useLanguageContext";
+import useGlobalContext from "./hook/useGlobalContext";
 const Button = () => {
-	const ctx = useLanguageContext();
+	const { language, color } = useGlobalContext();
+
 	const renderButtonText = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -12,9 +13,19 @@ const Button = () => {
 				return "OK";
 		}
 	};
+	const renderButtonColor = (color) => {
+		switch (color) {
+			case "BLUE":
+				return "blue";
+			default:
+				return "grey";
+		}
+	};
 	return (
 		<div className="<Button>">
-			<div role="button">{renderButtonText(ctx.language)}</div>
+			<div role="button" style={{ color: color.color }}>
+				{renderButtonText(language.language)}
+			</div>
 		</div>
 	);
 };
