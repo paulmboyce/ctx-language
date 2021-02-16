@@ -1,10 +1,25 @@
+import React from "react";
+
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
+
+import { MyRedux } from "./myredux/MyRedux";
+import LanguageContext from "./context/LanguageContext";
+import ColorContext from "./context/ColorContext";
+
+const store = {
+	language: React.createContext({ language: "EN" }),
+	color: React.createContext({ color: "RED" }),
+};
 
 describe("Test <App>", function () {
 	beforeEach(function () {
 		//ARR
-		render(<App />);
+		render(
+			<MyRedux store={store}>
+				<App />
+			</MyRedux>
+		);
 	});
 
 	it("renders select a language", () => {
