@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import LanguageContext from "./context/LanguageContext";
 import ColorContext from "./context/ColorContext";
-import Field from "./FieldClass";
+import Field from "./Field";
 import Button from "./Button";
 
 function App() {
