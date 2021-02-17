@@ -3,8 +3,9 @@ import LanguageContext from "./context/LanguageContext";
 import ColorContext from "./context/ColorContext";
 import Field from "./Field";
 import Button from "./Button";
+import { MyConnector } from "./myredux";
 
-function App() {
+function App(props) {
 	const [lang, setLang] = useState("EN");
 	const [color, setColor] = useState("RED");
 	return (
@@ -30,20 +31,12 @@ function App() {
 							Portuguese
 						</span>
 						<span> </span>
-						<LanguageContext.Consumer>
-							{(ctx) => {
-								return (
-									<span style={{ fontWeight: 700 }}>
-										Showing: {ctx.language}
-									</span>
-								);
-							}}
-						</LanguageContext.Consumer>
+						<span style={{ fontWeight: 700 }}>Showing: {props.language}</span>
 					</div>
 					{(() => {
 						return (
 							<div>
-								<Field name="blabla" />
+								<Field />
 								<Button />
 							</div>
 						);
@@ -54,4 +47,4 @@ function App() {
 	);
 }
 
-export default App;
+export default MyConnector()(App);

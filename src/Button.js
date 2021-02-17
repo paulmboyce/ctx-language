@@ -1,8 +1,8 @@
 import { React } from "react";
-import useGlobalContext from "./hook/useGlobalContext";
-const Button = () => {
-	const { language, color } = useGlobalContext();
 
+import { MyConnector } from "./myredux";
+
+const Button = (props) => {
 	const renderButtonText = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -23,11 +23,11 @@ const Button = () => {
 	};
 	return (
 		<div className="<Button>">
-			<div role="button" style={{ color: color.color }}>
-				{renderButtonText(language.language)}
+			<div role="button" style={{ color: props.color }}>
+				{renderButtonText(props.language)}
 			</div>
 		</div>
 	);
 };
 
-export default Button;
+export default MyConnector()(Button);

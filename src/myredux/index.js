@@ -16,19 +16,19 @@ function MyRedux({ children }) {
 	return children;
 }
 
-function MyConnector({ mapContextToProps }) {
+function MyConnector() {
 	return function (WrappedComponent) {
 		return class extends React.Component {
 			renderWrapped = (language) => {
-				const consumer = _STORE.color;
+				const ctx = _STORE.color;
 				return (
-					<consumer.Consumer>
+					<ctx.Consumer>
 						{(color) => {
 							return (
 								<WrappedComponent {...this.props} {...color} {...language} />
 							);
 						}}
-					</consumer.Consumer>
+					</ctx.Consumer>
 				);
 			};
 
