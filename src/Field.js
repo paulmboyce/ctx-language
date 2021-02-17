@@ -1,10 +1,10 @@
 import { React } from "react";
 import LanguageContext from "./context/LanguageContext";
-
-import { MyConnector } from "./myredux/MyRedux";
+import { MyConnector } from "./myredux";
 
 const Field = (props) => {
-	console.log("Rendering FIELD, with PROPS:  ", props);
+	console.log("Field PROPS: ", props);
+
 	const renderLabel = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -27,8 +27,9 @@ const Field = (props) => {
 	);
 };
 
-function mapContextToProps(ctx) {
-	console.log("mapContextToProps", ctx);
-	return { color: ctx.color };
+function mapContextToProps(ctxState) {
+	console.log("mapContextToProps", ctxState.color._currentValue);
+
+	return { color: ctxState.color, lang: ctxState.language };
 }
 export default MyConnector({ mapContextToProps })(Field);

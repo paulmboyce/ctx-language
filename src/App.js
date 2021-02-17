@@ -43,7 +43,7 @@ function App() {
 					{(() => {
 						return (
 							<div>
-								<Field />
+								<Field name="blabla" />
 								<Button />
 							</div>
 						);

@@ -1,7 +1,6 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { MyRedux } from "./myredux/MyRedux";
+import { MyRedux } from "./myredux";
 
 ReactDOM.render(
 	<MyRedux>
