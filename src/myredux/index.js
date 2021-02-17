@@ -4,39 +4,31 @@ import ColorContext from "../context/ColorContext";
 import LanguageContext from "../context/LanguageContext";
 
 const _STORE = {
-	language: LanguageContext, // multiple just to show we only extract a subset of state in any component
-	language2: LanguageContext,
+	language: LanguageContext,
 	color: ColorContext,
-	color2: ColorContext,
 };
 
-function MyRedux({ children }) {
-	//console.log("MyRedux store...", store);
-	//	console.log("MyRedux _STORE...", _STORE);
-	return children;
-}
-
 function MyConnector() {
-	return function (WrappedComponent) {
+	return function wrapAndInjectProps(WrappedComponent) {
 		return class extends React.Component {
-			renderWrapped = (language) => {
-				const ctx = _STORE.color;
-				return (
-					<ctx.Consumer>
-						{(color) => {
-							return (
-								<WrappedComponent {...this.props} {...color} {...language} />
-							);
-						}}
-					</ctx.Consumer>
-				);
-			};
-
 			render = () => {
 				return (
 					<_STORE.language.Consumer>
 						{(language) => {
-							return this.renderWrapped(language);
+							return (
+								<_STORE.color.Consumer>
+									{(color) => {
+										return (
+											// NOTE: Very hard coded injection of props color and language :/
+											<WrappedComponent
+												{...this.props}
+												{...color}
+												{...language}
+											/>
+										);
+									}}
+								</_STORE.color.Consumer>
+							);
 						}}
 					</_STORE.language.Consumer>
 				);
@@ -45,4 +37,4 @@ function MyConnector() {
 	};
 }
 
-export { MyRedux, MyConnector };
+export { MyConnector };
