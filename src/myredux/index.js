@@ -19,13 +19,14 @@ function initState() {
 	return state;
 }
 
-function dispatch(action) {
+function dispatch(action, handleChange) {
 	console.log("DISPATCHED: action: ", action);
 	for (const prop in _STATE) {
 		const oldState = _STATE[prop];
 		_STATE[prop] = _REDUCERS[prop](oldState, action);
 	}
 	console.log("_STATE: (updated...):", _STATE);
+	handleChange();
 }
 
 function MyRedux({ children }) {
@@ -46,7 +47,7 @@ function MyConnector() {
 			constructor(props) {
 				super(props);
 				console.log("ShouldRenderOnStateChange PROPS: ", props);
-				this.state = _STATE;
+				this.state = { data: _STATE };
 			}
 
 			render() {
@@ -62,9 +63,10 @@ function MyConnector() {
 											// NOTE: Very hard coded injection of props color and language :/
 											<WrappedComponent
 												{...this.props}
-												{...this.state.color}
-												{...this.state.language}
+												color={this.state.data.color}
+												language={this.state.data.language}
 												dispatch={dispatch}
+												data={this.state.data}
 											/>
 										);
 									}}
