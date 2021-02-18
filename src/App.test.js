@@ -7,7 +7,12 @@ import { MyRedux } from "./myredux";
 describe("Test <App>", function () {
 	beforeEach(function () {
 		//ARR
-		render(<App />);
+
+		render(
+			<MyRedux>
+				<App />
+			</MyRedux>
+		);
 	});
 
 	it("renders select a language", () => {
@@ -34,7 +39,7 @@ describe("Test <App>", function () {
 		expect(screen.getByLabelText(/NAME/i)).toBeInTheDocument();
 	});
 
-	it("shows label, button in PT, when click on PT language", async function () {
+	fit("shows label, button in PT, when click on PT language", async function () {
 		//ACT
 		fireEvent.click(screen.getByText(/PORTUGUESE/i));
 

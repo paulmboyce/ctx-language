@@ -1,49 +1,45 @@
-import { React, useState } from "react";
-import LanguageContext from "./context/LanguageContext";
-import ColorContext from "./context/ColorContext";
+import { React } from "react";
 import Field from "./Field";
 import Button from "./Button";
+
 import { MyConnector } from "./myredux";
 
 function App(props) {
-	const [lang, setLang] = useState("EN");
-	const [color, setColor] = useState("RED");
+	console.log("APP PROPS: ", props);
 	return (
-		<ColorContext.Provider value={{ color: color }}>
-			<LanguageContext.Provider value={{ language: lang }}>
-				<div>
+		<div>
+			<div>
+				<span>Select a language:</span>
+				<span
+					onClick={() => {
+						props.dispatch({ type: "SET_LANGUAGE", payload: "EN" });
+						props.dispatch({ type: "SET_COLOR", payload: "BLUE" });
+					}}
+				>
+					US
+				</span>
+				<span
+					onClick={() => {
+						props.dispatch({ type: "SET_LANGUAGE", payload: "PT" });
+						props.dispatch({ type: "SET_COLOR", payload: "GREEN" });
+					}}
+				>
+					Portuguese
+				</span>
+				<span> </span>
+				<span style={{ fontWeight: 700 }}>
+					Showing: {props.language.language}
+				</span>
+			</div>
+			{(() => {
+				return (
 					<div>
-						<span>Select a language:</span>
-						<span
-							onClick={() => {
-								setLang("EN");
-								setColor("BLUE");
-							}}
-						>
-							US
-						</span>
-						<span
-							onClick={() => {
-								setLang("PT");
-								setColor("GREEN");
-							}}
-						>
-							Portuguese
-						</span>
-						<span> </span>
-						<span style={{ fontWeight: 700 }}>Showing: {props.language}</span>
+						<Field />
+						<Button />
 					</div>
-					{(() => {
-						return (
-							<div>
-								<Field />
-								<Button />
-							</div>
-						);
-					})()}
-				</div>
-			</LanguageContext.Provider>
-		</ColorContext.Provider>
+				);
+			})()}
+		</div>
 	);
 }
 

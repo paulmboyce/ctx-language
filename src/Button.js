@@ -3,6 +3,7 @@ import { React } from "react";
 import { MyConnector } from "./myredux";
 
 const Button = (props) => {
+	//	console.log("BUTTON PROPS: ", props);
 	const renderButtonText = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -23,8 +24,8 @@ const Button = (props) => {
 	};
 	return (
 		<div className="<Button>">
-			<div role="button" style={{ color: props.color }}>
-				{renderButtonText(props.language)}
+			<div role="button" style={{ color: props.color.color }}>
+				{renderButtonText(props.language.language)}
 			</div>
 		</div>
 	);
