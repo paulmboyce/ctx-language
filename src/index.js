@@ -1,4 +1,10 @@
 import ReactDOM from "react-dom";
-import App from "./App";
+import MyApp from "./App";
+import { MyRedux } from "./myredux";
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(
+	<MyRedux>
+		<MyApp />
+	</MyRedux>,
+	document.querySelector("#root")
+);

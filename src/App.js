@@ -1,4 +1,3 @@
-import { React, useState } from "react";
 import Field from "./Field";
 import Button from "./Button";
 
@@ -6,12 +5,6 @@ import { MyConnector } from "./myredux";
 
 function App(props) {
 	console.log("APP PROPS: ", props);
-	const [refresh, setRefresh] = useState(false);
-
-	const handleChange = () => {
-		console.log("CAlled handleChange...");
-		setRefresh(!refresh);
-	};
 
 	return (
 		<div>
@@ -19,28 +12,16 @@ function App(props) {
 				<span>Select a language:</span>
 				<span
 					onClick={() => {
-						props.dispatch(
-							{ type: "SET_LANGUAGE", payload: "EN" },
-							handleChange
-						);
-						props.dispatch(
-							{ type: "SET_COLOR", payload: "BLUE" },
-							handleChange
-						);
+						props.dispatch({ type: "SET_LANGUAGE", payload: "EN" });
+						props.dispatch({ type: "SET_COLOR", payload: "BLUE" });
 					}}
 				>
 					US
 				</span>
 				<span
 					onClick={() => {
-						props.dispatch(
-							{ type: "SET_LANGUAGE", payload: "PT" },
-							handleChange
-						);
-						props.dispatch(
-							{ type: "SET_COLOR", payload: "GREEN" },
-							handleChange
-						);
+						props.dispatch({ type: "SET_LANGUAGE", payload: "PT" });
+						props.dispatch({ type: "SET_COLOR", payload: "GREEN" });
 					}}
 				>
 					Portuguese
@@ -62,4 +43,5 @@ function App(props) {
 	);
 }
 
-export default MyConnector()(App);
+//export default MyConnector()(App);
+export default App;

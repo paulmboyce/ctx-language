@@ -29,16 +29,57 @@ function dispatch(action, handleChange) {
 	handleChange();
 }
 
+//const WrappedApp = wrapAppHoc(MyApp);
+
 function MyRedux({ children }) {
+	const appComponent = React.Children.only(children);
+	console.log("wrappedComponent TYPE: ", appComponent.type);
+	const WrappedApp = wrapAppHoc(appComponent.type);
+
 	return (
 		<div>
 			<ColorContext.Provider value={{ color: _STATE.color }}>
 				<LanguageContext.Provider value={{ language: _STATE.language }}>
-					<div>{children}</div>
+					<WrappedApp />
 				</LanguageContext.Provider>
 			</ColorContext.Provider>
 		</div>
 	);
+}
+
+function wrapAppHoc(WrappedComponent) {
+	return class extends React.Component {
+		constructor(props) {
+			super(props);
+			this.state = { refresh: false };
+		}
+
+		render() {
+			console.log("Render wrapAppHoc...");
+
+			return (
+				<WrappedComponent
+					{...this.props}
+					handleChange={this.handleChange}
+					dispatch={this.wrapDispatch}
+					text="hello world"
+					data={_STATE}
+					language={_STATE.language}
+					color={_STATE.color}
+				/>
+			);
+		}
+
+		handleChange = () => {
+			console.log("CAlled handleChange...");
+			this.setState({ refresh: !this.state.refresh });
+		};
+
+		wrapDispatch = (action) => {
+			console.log("Called wrap dispatch with action: ", action);
+			dispatch(action, this.handleChange);
+		};
+	};
 }
 
 function MyConnector() {
