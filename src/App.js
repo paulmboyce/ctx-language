@@ -1,11 +1,7 @@
 import Field from "./Field";
 import Button from "./Button";
 
-import { MyConnector } from "./myredux";
-
 function App(props) {
-	console.log("APP PROPS: ", props);
-
 	return (
 		<div>
 			<div>
@@ -27,9 +23,7 @@ function App(props) {
 					Portuguese
 				</span>
 				<span> </span>
-				<span style={{ fontWeight: 700 }}>
-					Showing: {props.language.language}
-				</span>
+				<span style={{ fontWeight: 700 }}>Showing: {props.language}</span>
 			</div>
 			{(() => {
 				return (
@@ -42,6 +36,4 @@ function App(props) {
 		</div>
 	);
 }
-
-//export default MyConnector()(App);
 export default App;

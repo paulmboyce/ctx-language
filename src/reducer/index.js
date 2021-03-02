@@ -1,14 +1,14 @@
-const colorReducer = (oldState = { color: "RED" }, action) => {
+const ColorReducer = (oldState = "RED", action) => {
 	if (action && action.type === "SET_COLOR") {
-		return { color: action.payload };
+		return action.payload;
 	}
 	return oldState;
 };
-const languageReducer = (oldState = { language: "EN" }, action) => {
+const LanguageReducer = (oldState = "EN", action) => {
 	if (action && action.type === "SET_LANGUAGE") {
-		return { language: action.payload };
+		return action.payload;
 	}
 	return oldState;
 };
 
-export { languageReducer, colorReducer };
+export { LanguageReducer, ColorReducer };

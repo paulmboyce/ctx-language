@@ -2,11 +2,11 @@ import React from "react";
 
 import ColorContext from "../context/ColorContext";
 import LanguageContext from "../context/LanguageContext";
-import { colorReducer, languageReducer } from "../reducer";
+import { ColorReducer, LanguageReducer } from "../reducer";
 
 const _REDUCERS = {
-	color: colorReducer,
-	language: languageReducer,
+	color: ColorReducer,
+	language: LanguageReducer,
 };
 
 const _STATE = initState();
@@ -20,29 +20,25 @@ function initState() {
 }
 
 function dispatch(action, handleChange) {
-	console.log("DISPATCHED: action: ", action);
+	console.log("DISPATCH: action: ", action);
 	for (const prop in _STATE) {
 		const oldState = _STATE[prop];
 		_STATE[prop] = _REDUCERS[prop](oldState, action);
 	}
-	console.log("_STATE: (updated...):", _STATE);
+	console.log("UPDATED _STATE as:", _STATE);
 	handleChange();
 }
 
-//const WrappedApp = wrapAppHoc(MyApp);
-
 function MyRedux({ children }) {
 	const appComponent = React.Children.only(children);
-	console.log("wrappedComponent TYPE: ", appComponent.type);
 	const WrappedApp = wrapAppHoc(appComponent.type);
-
+	console.log(
+		"rendering MyRedux to push new state to Providers... _STATE >>",
+		_STATE
+	);
 	return (
 		<div>
-			<ColorContext.Provider value={{ color: _STATE.color }}>
-				<LanguageContext.Provider value={{ language: _STATE.language }}>
-					<WrappedApp />
-				</LanguageContext.Provider>
-			</ColorContext.Provider>
+			<WrappedApp />
 		</div>
 	);
 }
@@ -51,32 +47,33 @@ function wrapAppHoc(WrappedComponent) {
 	return class extends React.Component {
 		constructor(props) {
 			super(props);
-			this.state = { refresh: false };
+			this.state = { refresh: false, data: _STATE };
 		}
 
 		render() {
-			console.log("Render wrapAppHoc...");
-
+			console.log("REFRESHED: Rendering wrapAppHoc, with state: ", this.state);
 			return (
-				<WrappedComponent
-					{...this.props}
-					handleChange={this.handleChange}
-					dispatch={this.wrapDispatch}
-					text="hello world"
-					data={_STATE}
-					language={_STATE.language}
-					color={_STATE.color}
-				/>
+				<ColorContext.Provider value={this.state.data.color}>
+					<LanguageContext.Provider value={this.state.data.language}>
+						<WrappedComponent
+							{...this.props}
+							handleChange={this.handleChange}
+							dispatch={this.wrapDispatch}
+							data={_STATE}
+							language={_STATE.language}
+							color={_STATE.color}
+						/>
+					</LanguageContext.Provider>
+				</ColorContext.Provider>
 			);
 		}
 
 		handleChange = () => {
-			console.log("CAlled handleChange...");
+			this.setState({ data: _STATE });
 			this.setState({ refresh: !this.state.refresh });
 		};
 
 		wrapDispatch = (action) => {
-			console.log("Called wrap dispatch with action: ", action);
 			dispatch(action, this.handleChange);
 		};
 	};
@@ -87,13 +84,10 @@ function MyConnector() {
 		return class ShouldRenderOnStateChange extends React.Component {
 			constructor(props) {
 				super(props);
-				console.log("ShouldRenderOnStateChange PROPS: ", props);
 				this.state = { data: _STATE };
 			}
 
 			render() {
-				console.log("RENDER MY CONNECTOR:...", this.props);
-				console.log("_STATE (in connector): ", this.state);
 				return (
 					<LanguageContext.Consumer>
 						{(language) => {
@@ -104,10 +98,9 @@ function MyConnector() {
 											// NOTE: Very hard coded injection of props color and language :/
 											<WrappedComponent
 												{...this.props}
-												color={this.state.data.color}
-												language={this.state.data.language}
+												color={color}
+												language={language}
 												dispatch={dispatch}
-												data={this.state.data}
 											/>
 										);
 									}}

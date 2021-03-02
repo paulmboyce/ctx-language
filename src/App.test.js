@@ -39,7 +39,7 @@ describe("Test <App>", function () {
 		expect(screen.getByLabelText(/NAME/i)).toBeInTheDocument();
 	});
 
-	fit("shows label, button in PT, when click on PT language", async function () {
+	it("shows label, button in PT, when click on PT language", async function () {
 		//ACT
 		fireEvent.click(screen.getByText(/PORTUGUESE/i));
 
@@ -55,6 +55,10 @@ describe("Test <App>", function () {
 	it("shows label in ENGLISH, when click on US language", async function () {
 		//ARR
 		fireEvent.click(screen.getByText(/PORTUGUESE/i));
+		await waitFor(function () {
+			expect(screen.getByLabelText(/NOME/i)).toBeInTheDocument();
+		});
+
 		//ACT
 		fireEvent.click(screen.getByText(/US/i));
 
