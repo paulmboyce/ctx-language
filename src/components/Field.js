@@ -1,5 +1,5 @@
 import { React } from "react";
-import { MyConnector } from "./myredux";
+import { MyConnector } from "../myredux";
 
 const Field = (props) => {
 	const renderLabel = (lang) => {

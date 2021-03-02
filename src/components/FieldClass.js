@@ -1,5 +1,5 @@
 import React from "react";
-import LanguageContext from "./context/LanguageContext";
+import LanguageContext from "../context/LanguageContext";
 
 class FieldClass extends React.Component {
 	static contextType = LanguageContext;

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 import App from "./App";
-import { MyRedux } from "./myredux";
+import { MyRedux } from "../myredux";
 
 describe("Test <App>", function () {
 	beforeEach(function () {

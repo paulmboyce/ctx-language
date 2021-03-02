@@ -1,6 +1,6 @@
 import { React } from "react";
 
-import { MyConnector } from "./myredux";
+import { MyConnector } from "../myredux";
 
 const Button = (props) => {
 	const renderButtonText = (lang) => {
