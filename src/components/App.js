@@ -11,7 +11,7 @@ function App(props) {
 	return (
 		<div className="ui container">
 			<div className="ui segment">
-				<LanguageSelector handleLanguageClick={dispatchLanguageClick} />
+				<LanguageSelector onLanguageChange={dispatchLanguageClick} />
 				{(() => {
 					return (
 						<div className="ui form segment">

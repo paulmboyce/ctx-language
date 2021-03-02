@@ -9,13 +9,13 @@ const LanguageSelector = (props) => {
 			<span>Select a language:</span>
 			<button
 				className="ui button inverted"
-				onClick={() => props.handleLanguageClick("EN", "BLUE")}
+				onClick={() => props.onLanguageChange("EN", "BLUE")}
 			>
 				US
 			</button>
 			<button
 				className="ui button inverted"
-				onClick={() => props.handleLanguageClick("PT", "GREEN")}
+				onClick={() => props.onLanguageChange("PT", "GREEN")}
 			>
 				Portuguese
 			</button>
