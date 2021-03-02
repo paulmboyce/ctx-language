@@ -15,7 +15,7 @@ const Field = () => {
 	return (
 		<div className="field">
 			<LanguageContext.Consumer>
-				{(language) => {
+				{({ language }) => {
 					return <label htmlFor="id-name">{renderLabel(language)}:</label>;
 				}}
 			</LanguageContext.Consumer>

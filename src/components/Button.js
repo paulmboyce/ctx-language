@@ -17,7 +17,7 @@ const Button = () => {
 
 	return (
 		<ColorContext.Consumer>
-			{(color) => {
+			{({ color }) => {
 				return (
 					<div
 						className="ui button"
@@ -25,7 +25,7 @@ const Button = () => {
 						style={{ backgroundColor: color, color: "white" }}
 					>
 						<LanguageContext.Consumer>
-							{(language) => renderButtonText(language)}
+							{({ language }) => renderButtonText(language)}
 						</LanguageContext.Consumer>
 					</div>
 				);
