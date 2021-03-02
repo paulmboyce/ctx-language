@@ -15,10 +15,12 @@ const Button = (props) => {
 	};
 
 	return (
-		<div className="<Button>">
-			<div role="button" style={{ color: props.color }}>
-				{renderButtonText(props.language)}
-			</div>
+		<div
+			className="ui button"
+			role="button"
+			style={{ backgroundColor: props.color, color: "white" }}
+		>
+			{renderButtonText(props.language)}
 		</div>
 	);
 };
