@@ -1,33 +1,17 @@
 import Field from "./Field";
 import Button from "./Button";
+import LanguageSelector from "./LanguageSelector";
 
 function App(props) {
+	const dispatchLanguageClick = (language, color) => {
+		props.dispatch({ type: "SET_LANGUAGE", payload: language });
+		props.dispatch({ type: "SET_COLOR", payload: color });
+	};
+
 	return (
 		<div className="ui container">
 			<div className="ui segment">
-				<div className="ui segment inverted">
-					<span>Select a language:</span>
-					<button
-						className="ui button inverted"
-						onClick={() => {
-							props.dispatch({ type: "SET_LANGUAGE", payload: "EN" });
-							props.dispatch({ type: "SET_COLOR", payload: "BLUE" });
-						}}
-					>
-						US
-					</button>
-					<button
-						className="ui button inverted"
-						onClick={() => {
-							props.dispatch({ type: "SET_LANGUAGE", payload: "PT" });
-							props.dispatch({ type: "SET_COLOR", payload: "GREEN" });
-						}}
-					>
-						Portuguese
-					</button>
-					<br />{" "}
-					<span style={{ fontWeight: 700 }}>Showing: {props.language}</span>
-				</div>
+				<LanguageSelector handleLanguageClick={dispatchLanguageClick} />
 				{(() => {
 					return (
 						<div className="ui form segment">
