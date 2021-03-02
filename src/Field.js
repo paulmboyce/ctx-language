@@ -12,8 +12,8 @@ const Field = (props) => {
 		}
 	};
 	return (
-		<div>
-			<label htmlFor="id-name">{renderLabel(props.language)}</label>
+		<div className="field">
+			<label htmlFor="id-name">{renderLabel(props.language)}:</label>
 			<input id="id-name" type="text"></input>
 		</div>
 	);
