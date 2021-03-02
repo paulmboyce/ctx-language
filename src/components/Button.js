@@ -1,8 +1,9 @@
 import { React } from "react";
 
-import { MyConnector } from "../myredux";
+import LanguageContext from "../context/LanguageContext";
+import ColorContext from "../context/ColorContext";
 
-const Button = (props) => {
+const Button = () => {
 	const renderButtonText = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -15,14 +16,22 @@ const Button = (props) => {
 	};
 
 	return (
-		<div
-			className="ui button"
-			role="button"
-			style={{ backgroundColor: props.color, color: "white" }}
-		>
-			{renderButtonText(props.language)}
-		</div>
+		<ColorContext.Consumer>
+			{(color) => {
+				return (
+					<div
+						className="ui button"
+						role="button"
+						style={{ backgroundColor: color, color: "white" }}
+					>
+						<LanguageContext.Consumer>
+							{(language) => renderButtonText(language)}
+						</LanguageContext.Consumer>
+					</div>
+				);
+			}}
+		</ColorContext.Consumer>
 	);
 };
 
-export default MyConnector()(Button);
+export default Button;

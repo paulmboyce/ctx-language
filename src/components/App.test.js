@@ -2,17 +2,11 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 import App from "./App";
-import { MyRedux } from "../myredux";
 
 describe("Test <App>", function () {
 	beforeEach(function () {
 		//ARR
-
-		render(
-			<MyRedux>
-				<App />
-			</MyRedux>
-		);
+		render(<App />);
 	});
 
 	it("renders select a language", () => {

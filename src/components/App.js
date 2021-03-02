@@ -1,28 +1,35 @@
 import Field from "./Field";
 import Button from "./Button";
 import LanguageSelector from "./LanguageSelector";
+import CtxDataStore from "../context/CtxDataStore";
+import { useState } from "react";
 
 function App(props) {
+	const [color, setColor] = useState("RED");
+	const [language, setLanguage] = useState("EN");
+
 	const dispatchLanguageClick = (language, color) => {
-		props.dispatch({ type: "SET_LANGUAGE", payload: language });
-		props.dispatch({ type: "SET_COLOR", payload: color });
+		setColor(color);
+		setLanguage(language);
 	};
 
 	return (
-		<div className="ui container">
-			<div className="ui segment">
-				<LanguageSelector onLanguageChange={dispatchLanguageClick} />
-				{(() => {
-					return (
-						<div className="ui form segment">
-							<Field />
-							<br />
-							<Button />
-						</div>
-					);
-				})()}
+		<CtxDataStore color={color} language={language}>
+			<div className="ui container">
+				<div className="ui segment">
+					<LanguageSelector onLanguageChange={dispatchLanguageClick} />
+					{(() => {
+						return (
+							<div className="ui form segment">
+								<Field />
+								<br />
+								<Button />
+							</div>
+						);
+					})()}
+				</div>
 			</div>
-		</div>
+		</CtxDataStore>
 	);
 }
 export default App;

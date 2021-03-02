@@ -1,7 +1,8 @@
 import { React } from "react";
-import { MyConnector } from "../myredux";
 
-const Field = (props) => {
+import LanguageContext from "../context/LanguageContext";
+
+const Field = () => {
 	const renderLabel = (lang) => {
 		switch (lang) {
 			case "PT":
@@ -13,10 +14,14 @@ const Field = (props) => {
 	};
 	return (
 		<div className="field">
-			<label htmlFor="id-name">{renderLabel(props.language)}:</label>
+			<LanguageContext.Consumer>
+				{(language) => {
+					return <label htmlFor="id-name">{renderLabel(language)}:</label>;
+				}}
+			</LanguageContext.Consumer>
 			<input id="id-name" type="text"></input>
 		</div>
 	);
 };
 
-export default MyConnector()(Field);
+export default Field;
